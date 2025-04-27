@@ -1,3 +1,5 @@
+from django.shortcuts import render
+from django.http import JsonResponse
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
@@ -34,4 +36,10 @@ class MeasurementList(generics.ListCreateAPIView):
 class TemperatureList(generics.ListCreateAPIView):
     queryset = Temperatures.objects.all()
     serializer_class = TemperatureSerializer
+
+def graph_page(request):
+    # Renders the template with dropdowns and Plotly graph
+    return render(request, 'air_quality.html')
+
+
 
