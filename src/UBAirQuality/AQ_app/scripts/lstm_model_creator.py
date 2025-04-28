@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from keras.models import Sequential
 from keras.layers import LSTM, Dense
+from keras.losses import MeanAbsoluteError
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from datetime import datetime
@@ -63,12 +64,12 @@ for pollutant in pollutants:
 
         #Final layer to predict the next weeks value
         model.add(Dense(7))
-        model.compile(optimizer='adam', loss='mae')
+        model.compile(optimizer='adam', loss=MeanAbsoluteError())
 
         #Train to model
         training = model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=20, batch_size=32)
 
         # Save model
-        model_filename = f"{location.name.replace(' ', '_')}_{pollutant.name}.h5"
+        model_filename = f"{location.name.replace(' ', '_')}_{pollutant.name}.keras"
         model_path = os.path.join(models_dir, model_filename)
         model.save(model_path)
