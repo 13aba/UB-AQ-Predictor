@@ -21,4 +21,31 @@ Users can choose a location and pollutant type, view interactive graphs of past 
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/13aba/ub-aq-predictor.git
+```
+### 2. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+### 3. Set up Django
+```bash
+python manage.py migrate
+```
+### 4. Populate the database from CSV files
+```bash
+python src/ubairquality/AQ_app/scripts/load_data.py
+```
+### 5. Run the development server
+```bash
+python manage.py runserver
+```
+---
+
+## Usage
+
+After starting the development server, the application is available at [http://127.0.0.1:8000](http://127.0.0.1:8000).
+
+-  **Historical Data**: Visit `/graph` to explore past air quality measurements by location and pollutant.
+-  **Air Quality Prediction**: Go to `/predict` to generate 7-day forecasts using trained LSTM models.
+-  **API Access**: Access structured JSON data through endpoints like `/api/locations/`, `/api/pollutants/`, and `/api/measurements/`.
+
 
